@@ -17,12 +17,16 @@ public class CrownBoomerang : MonoBehaviour
     [SerializeField] Transform myCrown;
 
     public Vector3 myCrownPoint;
+    Vector3 myChargeBarOriginalPos;
 
     float myChargeUp;
     public float myMaxChargeUp;
 
     public CrownState myCrownState;
-
+    private void Start()
+    {
+        myChargeBarOriginalPos = myChargeBar.transform.position;
+    }
     void Update()
     {
         switch(myCrownState)
@@ -54,6 +58,12 @@ public class CrownBoomerang : MonoBehaviour
             myChargeBar.fillAmount = (float)myChargeUp / (float)myMaxChargeUp;
 
             if (myChargeUp < myMaxChargeUp) myChargeUp += Time.deltaTime;
+
+            float x, y;
+            x = Mathf.Sin(Time.time * 50) * (myChargeUp * 5);
+            y = Mathf.Sin(Time.time * 100) * (myChargeUp * 5);
+
+            myChargeBar.transform.localPosition = myChargeBarOriginalPos + new Vector3(x, y, 0);
         }
 
         if (Input.GetMouseButtonUp(0))
