@@ -15,7 +15,7 @@ public class CameraScript : MonoBehaviour
     public Transform Target;
 
     public float mySpeed;
-    void Update()
+    void FixedUpdate()
     {
 
         if (Input.GetKeyDown(KeyCode.F))

@@ -16,7 +16,7 @@ public class Goomba : MonoBehaviour
     [SerializeField] LayerMask myLayerMask;
     [SerializeField] SpriteRenderer myRenderer;
 
-    bool myMovingRight = false;
+    [SerializeField] bool myMovingRight = false;
     void Start()
     {
         myBehavior = GoombaBehavior.Wander;
