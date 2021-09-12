@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goomba : MonoBehaviour
+public class Goomba : Enemy
 {
     public enum GoombaBehavior
     {
@@ -21,8 +21,16 @@ public class Goomba : MonoBehaviour
     [SerializeField]
     private float goombaDamage = 50f;
 
+    [SerializeField] Animator myAnimator;
+
     void Start()
     {
+        Init();
+    }
+
+    public override void Init()
+    {
+        base.Init();
         myBehavior = GoombaBehavior.Wander;
     }
 
@@ -52,12 +60,12 @@ public class Goomba : MonoBehaviour
 
         if (RightRay)
         {
-            myRenderer.flipX = true;
+            myRenderer.flipX = false;
             myMovingRight = false;
         }
         if (LeftRay)
         {
-            myRenderer.flipX = false;
+            myRenderer.flipX = true;
             myMovingRight = true;
         }
 
@@ -80,5 +88,18 @@ public class Goomba : MonoBehaviour
                 collision.gameObject.GetComponent<Player>().SetHealth(-goombaDamage, true);
             }
         }
+    }
+
+    public override void OnHit()
+    {
+        base.OnHit();
+        Destroy(GetComponent<Collider2D>());
+        myAnimator.SetTrigger("Death");
+        Destroy(gameObject, 2.0f);
+    }
+
+    private void OnDestroy()
+    {
+        RemoveEnemy();
     }
 }

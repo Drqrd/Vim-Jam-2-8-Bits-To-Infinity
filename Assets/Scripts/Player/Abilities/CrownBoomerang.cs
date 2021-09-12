@@ -15,6 +15,7 @@ public class CrownBoomerang : MonoBehaviour
     [SerializeField] Transform myOrigin;
     [SerializeField] Image myChargeBar;
     [SerializeField] Transform myCrown;
+    [SerializeField] Transform myCrownSprite;
 
     public Vector3 myCrownPoint;
     Vector3 myChargeBarOriginalPos;
@@ -23,16 +24,30 @@ public class CrownBoomerang : MonoBehaviour
     public float myMaxChargeUp;
 
     public CrownState myCrownState;
+
+    private Player myPlayer;
     private void Start()
     {
+        myPlayer = GameObject.Find("Player").GetComponent<Player>();
         myChargeBarOriginalPos = myChargeBar.transform.position;
     }
     void Update()
     {
-        switch(myCrownState)
+
+
+        switch (myCrownState)
         {
             case CrownState.Default:
-                myCrown.up = Vector3.up;
+
+                if (myPlayer != null)
+                {
+                    if (myPlayer.myPlayerSprite.flipX) myCrown.localScale = new Vector3(-1, 1, 1);
+                    if (!myPlayer.myPlayerSprite.flipX) myCrown.localScale = new Vector3(1, 1, 1);
+
+                    myCrownSprite.localScale = new Vector3(1, 1, 1) * (1.0f + (myChargeUp / myMaxChargeUp) * 0.5f);
+                }                                               
+
+                myCrownSprite.up = Vector3.up;
                 DefaultCrownState();
                 break;
             case CrownState.Thrown:
@@ -85,6 +100,11 @@ public class CrownBoomerang : MonoBehaviour
         myCrown.transform.parent = null;
         myCrown.position = Vector3.Lerp(myCrown.position, myCrownPoint, 5 * Time.deltaTime);
 
+        if(EnemyManager.Instance.CircleCollisionEnemy(myCrownSprite.position, 1))
+        {
+            myCrownState = CrownState.Returning;
+        }
+
         if (dist <= 0.1f) myCrownState = CrownState.Returning;
     }
     public void ReturningCrownState()
@@ -93,7 +113,7 @@ public class CrownBoomerang : MonoBehaviour
 
         myCrown.position = Vector3.MoveTowards(myCrown.position, myOrigin.position, 15 * Time.deltaTime);
 
-        if(dist <= 1)
+        if (dist <= 1)
         {
             myCrown.parent = transform;
             myCrown.position = myOrigin.position;
@@ -103,6 +123,6 @@ public class CrownBoomerang : MonoBehaviour
 
     public void RotateCrown()
     {
-        myCrown.Rotate(Vector3.forward * 720 * Time.deltaTime);
+        myCrownSprite.Rotate(Vector3.forward * 720 * Time.deltaTime);
     }
 }
