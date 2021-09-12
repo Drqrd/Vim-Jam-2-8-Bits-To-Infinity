@@ -15,8 +15,6 @@ public class PlayerMovement : Player
 
     [Header("Parameters")]
     [SerializeField]
-    private bool doubleJump = false;
-    [SerializeField]
     private float jumpForce = 10f;
     [SerializeField]
     private float moveSpeed = 4f;
@@ -27,7 +25,7 @@ public class PlayerMovement : Player
     [SerializeField]
     private float dashDuration = 0.5f;
 
-    public override bool DoubleJump { get { return doubleJump; } set { doubleJump = value; } }
+    public override bool DoubleJump { get; set; }
     public override float JumpForce { get { return jumpForce; } }
     public override float MoveSpeed { get { return moveSpeed; } }
 
@@ -165,12 +163,12 @@ public class PlayerMovement : Player
         if (doubleJumpKey == 1) 
         {
             doubleJumpKey = 0;
-            doubleJump = true; 
+            DoubleJump = true; 
         }
         else 
         { 
             doubleJumpKey = 1;
-            doubleJump = false;
+            DoubleJump = false;
         }
     }
 }

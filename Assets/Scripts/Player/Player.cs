@@ -69,8 +69,9 @@ public class Player : MonoBehaviour
 
     public bool CheckIfGrounded()
     {
-        Vector2 center = new Vector2(transform.position.x, transform.position.y - distToGround);
-        int colNum = Physics2D.OverlapCircle(center, _collider.bounds.extents.x + 0.1f, filter, colliders);
+        Vector2 point0 = new Vector2(transform.position.x - _collider.bounds.extents.x,transform.position.y -_collider.bounds.extents.y);
+        Vector2 point1 = new Vector2(transform.position.x + _collider.bounds.extents.x, transform.position.y -_collider.bounds.extents.y - .2f);
+        int colNum = Physics2D.OverlapArea(point0, point1, filter, colliders);
         return colNum > 1 ? true : false;
     }
 
@@ -83,8 +84,8 @@ public class Player : MonoBehaviour
 
     protected void OnDrawGizmos()
     {
-        Vector2 center = new Vector2(transform.position.x, transform.position.y - GetComponent<CapsuleCollider2D>().bounds.extents.y / 2f);
+        Vector2 center = new Vector2(transform.position.x, transform.position.y - GetComponent<CapsuleCollider2D>().bounds.extents.y -0.05f);
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(center, GetComponent<CapsuleCollider2D>().bounds.extents.x + 0.1f);
+        Gizmos.DrawCube(center, new Vector2(GetComponent<CapsuleCollider2D>().bounds.extents.x, .1f));
     }
 }
