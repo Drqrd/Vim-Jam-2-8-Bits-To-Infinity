@@ -71,11 +71,14 @@ public class Goomba : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player") 
         { 
-            collision.gameObject.GetComponent<Player>().SetHealth(-goombaDamage); 
+            if (!collision.gameObject.GetComponent<Player>().IsInvincible)
+            {
+                collision.gameObject.GetComponent<Player>().SetHealth(-goombaDamage, true);
+            }
         }
     }
 }

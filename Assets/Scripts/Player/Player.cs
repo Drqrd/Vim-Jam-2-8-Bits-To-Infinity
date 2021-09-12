@@ -1,9 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public class Player : MonoBehaviour
 {
     public float Health { get; protected set; }
+    public float InvincibilityTime { get; protected set; }
+    public bool IsInvincible { get; protected set; }
 
     public Rigidbody2D _rigidbody { get; protected set; }
     public CapsuleCollider2D _collider   { get; protected set; }
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider  = GetComponent<CapsuleCollider2D>();
         Health = 100f;
+        InvincibilityTime = 2f;
 
         colliders = new Collider2D[2];
         filter = new ContactFilter2D();
@@ -52,10 +56,12 @@ public class Player : MonoBehaviour
     }
 
     // Adds to the health by value
-    public void SetHealth(float numToAdd)
+    public void SetHealth(float numToAdd, bool damagedByEnemy = false)
     {
         Health += numToAdd;
         Debug.Log("Health to " + Health);
+
+        if (damagedByEnemy) { StartCoroutine(DamageInvincibilityTimer()); }
     }
 
     public bool CheckIfGrounded()
@@ -65,11 +71,17 @@ public class Player : MonoBehaviour
         return colNum > 1 ? true : false;
     }
 
+    public IEnumerator DamageInvincibilityTimer()
+    {
+        IsInvincible = true;
+        yield return new WaitForSeconds(InvincibilityTime);
+        IsInvincible = false;
+    }
+
     protected void OnDrawGizmos()
     {
         Vector2 center = new Vector2(transform.position.x, transform.position.y - GetComponent<CapsuleCollider2D>().bounds.extents.y / 2f);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(center, GetComponent<CapsuleCollider2D>().bounds.extents.x + 0.1f);
-        
     }
 }
