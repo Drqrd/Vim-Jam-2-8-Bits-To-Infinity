@@ -25,7 +25,6 @@ public class PlayerMovement : Player
     [SerializeField]
     private float dashDuration = 0.5f;
 
-    public override bool DoubleJump { get; set; }
     public override float JumpForce { get { return jumpForce; } }
     public override float MoveSpeed { get { return moveSpeed; } }
 

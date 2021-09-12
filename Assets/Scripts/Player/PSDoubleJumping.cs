@@ -31,7 +31,7 @@ public class PSDoubleJumping : PlayerState
     public override void OnStateEnter()
     {
         if (playerRef._rigidbody.velocity.y < 1f) { playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce); }
-        else { playerRef._rigidbody.velocity += (Vector2.up * playerRef.JumpForce) * (1f / (playerRef._rigidbody.velocity.y)); }
+        else { playerRef._rigidbody.velocity += (Vector2.up * playerRef.JumpForce) * (1f / (playerRef._rigidbody.velocity.y - 1f)); }
     }
 
     public override void OnStateExit()
