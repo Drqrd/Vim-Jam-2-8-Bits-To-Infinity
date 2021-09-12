@@ -31,7 +31,7 @@ public class PSJumping : PlayerState
     }
 
     public override void OnStateEnter()
-    {
+    { 
         playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce);
     }
 }
