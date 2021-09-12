@@ -17,6 +17,10 @@ public class Goomba : MonoBehaviour
     [SerializeField] SpriteRenderer myRenderer;
 
     [SerializeField] bool myMovingRight = false;
+
+    [SerializeField]
+    private float goombaDamage = 50f;
+
     void Start()
     {
         myBehavior = GoombaBehavior.Wander;
@@ -64,6 +68,17 @@ public class Goomba : MonoBehaviour
         else
         {
             transform.Translate(-Vector2.right * mySpeed * Time.deltaTime);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player") 
+        { 
+            if (!collision.gameObject.GetComponent<Player>().IsInvincible)
+            {
+                collision.gameObject.GetComponent<Player>().SetHealth(-goombaDamage, true);
+            }
         }
     }
 }

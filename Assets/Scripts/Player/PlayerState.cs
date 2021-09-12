@@ -8,7 +8,11 @@ public abstract class PlayerState
         this.playerRef = playerRef;
     }
 
+    // Update
     public abstract void Tick();
+
+    // Fixed Update
+    public abstract void FixedTick();
 
     public virtual void OnStateEnter() { }
     public virtual void OnStateExit() { }

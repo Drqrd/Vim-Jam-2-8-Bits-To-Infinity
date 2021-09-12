@@ -6,11 +6,19 @@ public class PSIdle : PlayerState
     {
         this.playerRef = playerRef;
     }
+
+    private Vector2 movement;
+
     public override void Tick()
     {
+        movement = playerRef.HandleInput();
+    }
+
+    public override void FixedTick()
+    {
         // Change states checks
-        if (Mathf.Abs(playerRef.HandleInput().x) > 0f) { playerRef.SetState(new PSMoving(playerRef)); }
-        if (Mathf.Abs(playerRef.HandleInput().y) > 0f) { playerRef.SetState(new PSJumping(playerRef)); }
+        if (Mathf.Abs(movement.x) > 0f) { playerRef.SetState(new PSMoving(playerRef)); }
+        if (Mathf.Abs(movement.y) > 0f && playerRef.IsGrounded) { playerRef.SetState(new PSJumping(playerRef)); }
     }
 
     public override void OnStateEnter()

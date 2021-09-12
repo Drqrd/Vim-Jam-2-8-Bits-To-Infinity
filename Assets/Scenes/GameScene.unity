@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 309631952}
   m_Layer: 0
   m_Name: Player Test
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,7 +397,9 @@ MonoBehaviour:
   right: 100
   jump: 32
   jumpForce: 10
-  moveSpeed: 2
+  moveSpeed: 4
+  dashCheckTime: 0.4
+  dashSpeed: 10
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
