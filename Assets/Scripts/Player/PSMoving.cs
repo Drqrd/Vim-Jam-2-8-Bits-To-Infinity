@@ -24,7 +24,6 @@ public class PSMoving : PlayerState
 
     public override void OnStateEnter()
     {
-        Debug.Log("Moving");
         playerRef._collider.sharedMaterial = playerRef.NoFriction;
     }
 }

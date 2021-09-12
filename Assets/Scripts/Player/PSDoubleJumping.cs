@@ -30,7 +30,6 @@ public class PSDoubleJumping : PlayerState
 
     public override void OnStateEnter()
     {
-        Debug.Log("Double Jumping");
         playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce);
     }
 

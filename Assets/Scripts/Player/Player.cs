@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     public virtual PhysicsMaterial2D NoFriction { get; protected set; }
     public virtual PhysicsMaterial2D Friction   { get; protected set; }
 
+    public Animator myPlayerAnimator;
+    public SpriteRenderer myPlayerSprite;
+
     protected float distToGround;
     Collider2D[] colliders;
     ContactFilter2D filter;

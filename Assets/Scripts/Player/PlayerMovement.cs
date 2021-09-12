@@ -98,6 +98,11 @@ public class PlayerMovement : Player
         if (dashingLeft) { movement += Dash(Vector2.left); }
         if (dashingRight) { movement += Dash(Vector2.right); }
 
+
+        if (movement.x > 0) myPlayerSprite.flipX = true;
+        if (movement.x < 0) myPlayerSprite.flipX = false;
+
+
         return new Vector2(movement.x * moveSpeed, movement.y * jumpForce);
     }
 
@@ -126,7 +131,7 @@ public class PlayerMovement : Player
         // Successful double tap
         if (key == left)
         {
-            if (doubleTapLeftDuration > 0f && doubleTapLeft == 1) { dashingLeft = true; }
+            if (doubleTapLeftDuration > 0f && doubleTapLeft == 1) { dashingLeft = true; myPlayerAnimator.SetTrigger("Dash"); }
             // Single tap
             else
             {
@@ -136,7 +141,7 @@ public class PlayerMovement : Player
         }
         else
         {
-            if (doubleTapRightDuration > 0f && doubleTapRight == 1) { dashingRight = true; }
+            if (doubleTapRightDuration > 0f && doubleTapRight == 1) { dashingRight = true; myPlayerAnimator.SetTrigger("Dash"); }
             else
             {
                 doubleTapRightDuration = dashCheckTime;
