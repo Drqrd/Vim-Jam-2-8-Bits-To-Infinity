@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PSJumping : PlayerState
+public class PSDoubleJumping : PlayerState
 {
-    public PSJumping(Player playerRef) : base(playerRef)
+    public PSDoubleJumping(Player playerRef) : base(playerRef)
     {
         this.playerRef = playerRef;
     }
@@ -23,8 +23,6 @@ public class PSJumping : PlayerState
             if (Mathf.Abs(playerRef._rigidbody.velocity.x) != 0f) { playerRef.SetState(new PSMoving(playerRef)); }
             else { playerRef.SetState(new PSIdle(playerRef)); }
         }
-        
-        if (playerRef.DoubleJump) { playerRef.SetState(new PSDoubleJumping(playerRef)); }
 
         // Move player
         playerRef._rigidbody.velocity = new Vector3(movement.x, playerRef._rigidbody.velocity.y);
@@ -32,7 +30,12 @@ public class PSJumping : PlayerState
 
     public override void OnStateEnter()
     {
-        Debug.Log("Jumping");
+        Debug.Log("Double Jumping");
         playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce);
+    }
+
+    public override void OnStateExit()
+    {
+        playerRef.DoubleJump = false;
     }
 }

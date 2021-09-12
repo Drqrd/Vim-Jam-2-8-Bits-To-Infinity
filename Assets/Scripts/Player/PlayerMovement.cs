@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : Player
@@ -14,12 +15,33 @@ public class PlayerMovement : Player
 
     [Header("Parameters")]
     [SerializeField]
+    private bool doubleJump = false;
+    [SerializeField]
     private float jumpForce = 10f;
     [SerializeField]
-    private float moveSpeed = 10f;
+    private float moveSpeed = 4f;
+    [SerializeField]
+    private float dashCheckTime = 0.5f;
+    [SerializeField]
+    private float dashSpeed = 10f;
+    [SerializeField]
+    private float dashDuration = 0.5f;
 
+    public override bool DoubleJump { get { return doubleJump; } set { doubleJump = value; } }
     public override float JumpForce { get { return jumpForce; } }
     public override float MoveSpeed { get { return moveSpeed; } }
+
+    // Dash logic
+    private bool dashingLeft  = false;
+    private bool dashingRight = false;
+    private float dashLerp     = 0f;
+    private float dashVal      = 1f;
+    private int   doubleTapLeft          = 0;
+    private float doubleTapLeftDuration  = 0f;
+    private int   doubleTapRight         = 0;
+    private float doubleTapRightDuration = 0f;
+
+    private int doubleJumpKey = 0;
 
     protected override void Awake()
     {
@@ -27,10 +49,21 @@ public class PlayerMovement : Player
         currentState = new PSIdle(this);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        currentState.Tick();
+
+        DoubleTapCheck();
+
+        DashInterpolation();
+    }
+
     // Physics update
     private void FixedUpdate()
     {
-        currentState.Tick();
+        currentState.FixedTick();
     }
 
     // Change state function
@@ -55,6 +88,84 @@ public class PlayerMovement : Player
         if (Input.GetKey(right)) { movement += Vector2.right; }
         if (Input.GetKey(jump))  { movement += Vector2.up; }
 
+        // Dash logic
+        if (Input.GetKeyDown(left) && !dashingLeft)  { DashCheck(left); }
+        if (Input.GetKeyDown(right) && !dashingRight) { DashCheck(right); }
+        
+        // Double jump logic
+        if (Input.GetKeyDown(jump)) { DoubleJumpCheck(); }
+
+        if (dashingLeft) { movement += Dash(Vector2.left); }
+        if (dashingRight) { movement += Dash(Vector2.right); }
+
         return new Vector2(movement.x * moveSpeed, movement.y * jumpForce);
+    }
+
+    private void DashInterpolation()
+    {
+        if (dashingLeft || dashingRight)
+        {
+            dashLerp += Time.deltaTime * (1 / dashDuration);
+            dashVal = Mathf.Lerp(0f, 1f, dashLerp);
+            if (dashVal >= 1) { dashingLeft = false; dashingRight = false; }
+        }
+        else { dashLerp = 0f; }
+    }
+
+    private void DoubleTapCheck()
+    {
+        if (doubleTapLeftDuration > 0) { doubleTapLeftDuration -= Time.deltaTime; }
+        else { doubleTapLeft = 0; }
+
+        if (doubleTapRightDuration > 0) { doubleTapRightDuration -= Time.deltaTime; }
+        else { doubleTapRight = 0; }
+    }
+
+    private void DashCheck(KeyCode key)
+    {
+        // Successful double tap
+        if (key == left)
+        {
+            if (doubleTapLeftDuration > 0f && doubleTapLeft == 1) { dashingLeft = true; }
+            // Single tap
+            else
+            {
+                doubleTapLeftDuration = dashCheckTime;
+                doubleTapLeft = 1;
+            }
+        }
+        else
+        {
+            if (doubleTapRightDuration > 0f && doubleTapRight == 1) { dashingRight = true; }
+            else
+            {
+                doubleTapRightDuration = dashCheckTime;
+                doubleTapRight = 1;
+            }
+        }
+    }
+
+    private Vector2 Dash(Vector2 direction)
+    { 
+        return dashSpeed * DashFunction(dashVal) * direction;
+    }
+
+    private float DashFunction(float x)
+    {
+        return 1 - (1 - Mathf.Exp(4 * x)) / (1 - Mathf.Exp(4));
+    }
+
+    private void DoubleJumpCheck()
+    {
+        if (doubleJumpKey == 1) 
+        {
+            doubleJumpKey = 0;
+            doubleJump = true; 
+        }
+        else 
+        { 
+            doubleJumpKey = 1;
+            doubleJump = false;
+        }
     }
 }
