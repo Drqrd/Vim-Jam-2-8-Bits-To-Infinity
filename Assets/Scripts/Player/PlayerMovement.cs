@@ -43,7 +43,7 @@ public class PlayerMovement : Player
     protected override void Awake()
     {
         base.Awake();
-        currentState = new PSIdle(this);
+        currentState = new PSIdle(this);;
     }
 
     protected override void Update()
@@ -157,7 +157,7 @@ public class PlayerMovement : Player
         return 1 - (1 - Mathf.Exp(4 * x)) / (1 - Mathf.Exp(4));
     }
 
-    private void DoubleJumpCheck()
+    private void DoubleJumpCheck() // This is the weird double jump check. Suggest checking if the player is grounded instead.
     {
         if (doubleJumpKey == 1) 
         {

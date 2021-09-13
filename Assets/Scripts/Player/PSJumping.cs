@@ -22,16 +22,24 @@ public class PSJumping : PlayerState
             // If there is x velocity, set state to moving, else idle
             if (Mathf.Abs(playerRef._rigidbody.velocity.x) != 0f) { playerRef.SetState(new PSMoving(playerRef)); }
             else { playerRef.SetState(new PSIdle(playerRef)); }
+
+            
         }
         
         if (playerRef.DoubleJump) { playerRef.SetState(new PSDoubleJumping(playerRef)); }
 
         // Move player
         playerRef._rigidbody.velocity = new Vector3(movement.x, playerRef._rigidbody.velocity.y);
+
+        
     }
 
     public override void OnStateEnter()
     { 
         playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce);
+
+        //Play a sound ;)
+        Debug.Log("Jump!");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_jump", playerRef.transform.position);
     }
 }
