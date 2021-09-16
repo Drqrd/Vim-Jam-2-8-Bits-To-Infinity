@@ -34,8 +34,7 @@ public class PSDoubleJumping : PlayerState
         else { playerRef._rigidbody.velocity += (Vector2.up * playerRef.JumpForce) * (1f / (playerRef._rigidbody.velocity.y - 1f)); }
 
         //Play a sound ;)
-        Debug.Log("Double Jump!");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_jump", playerRef.transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/player_doubleJump", playerRef.transform.position);
     }
 
     public override void OnStateExit()

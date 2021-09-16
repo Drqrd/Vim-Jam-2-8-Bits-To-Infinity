@@ -64,7 +64,11 @@ public class Player : MonoBehaviour
         Health += numToAdd;
         Debug.Log("Health to " + Health);
 
-        if (damagedByEnemy) { StartCoroutine(DamageInvincibilityTimer()); }
+        if (damagedByEnemy) 
+        { 
+            StartCoroutine(DamageInvincibilityTimer());
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/player_onDamage", transform.position);
+        }
     }
 
     public bool CheckIfGrounded()

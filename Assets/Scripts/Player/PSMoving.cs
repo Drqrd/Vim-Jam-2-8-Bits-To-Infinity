@@ -26,4 +26,9 @@ public class PSMoving : PlayerState
     {
         playerRef._collider.sharedMaterial = playerRef.NoFriction;
     }
+
+    public override void OnStateExit()
+    {
+
+    }
 }

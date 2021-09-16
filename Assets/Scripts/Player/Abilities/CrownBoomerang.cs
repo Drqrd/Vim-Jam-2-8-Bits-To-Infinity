@@ -25,11 +25,19 @@ public class CrownBoomerang : MonoBehaviour
 
     public CrownState myCrownState;
 
+    //FMOD Audio Events
+    public FMOD.Studio.EventInstance player_crownCharge;
+    public FMOD.Studio.EventInstance player_crown;
+
     private Player myPlayer;
     private void Start()
     {
         myPlayer = GameObject.Find("Player").GetComponent<Player>();
         myChargeBarOriginalPos = myChargeBar.transform.position;
+
+        //prepare FMOD instances
+        player_crownCharge = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/Player/player_crownCharge");
+        player_crown = FMODUnity.RuntimeManager.CreateInstance("event:/SFX/Player/player_crown");
     }
     void Update()
     {
@@ -79,6 +87,16 @@ public class CrownBoomerang : MonoBehaviour
             y = Mathf.Sin(Time.time * 100) * (myChargeUp * 5);
 
             myChargeBar.transform.localPosition = myChargeBarOriginalPos + new Vector3(x, y, 0);
+
+            if (PlayerAudioManager.IsPlaying(player_crownCharge) != true)
+            {
+                player_crownCharge.start();
+            }
+
+            //0 to 0.5
+            player_crownCharge.setParameterByName("crownCharge", myChargeUp);
+
+            
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -86,16 +104,23 @@ public class CrownBoomerang : MonoBehaviour
             if (myChargeUp >= myMaxChargeUp)
             {
                 myCrownState = CrownState.Thrown;
-                Debug.Log("Throw crown");
+
+                //play crown audio
+                player_crown.start();
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(player_crown, myCrown, myCrown.GetComponent<Rigidbody2D>());
             }
 
             myChargeUp = 0;
             myChargeBar.fillAmount = 0;
+
+            player_crownCharge.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }
     }
     public void ThrownCrownState()
     {
         float dist = Vector3.Distance(myCrown.position, myCrownPoint);
+        //Debug.Log(-(dist - 9));
+        //player_crown.setParameterByName("crownDistance", -(dist - 9));
 
         myCrown.transform.parent = null;
         myCrown.position = Vector3.Lerp(myCrown.position, myCrownPoint, 5 * Time.deltaTime);
@@ -105,19 +130,27 @@ public class CrownBoomerang : MonoBehaviour
             myCrownState = CrownState.Returning;
         }
 
+
+
         if (dist <= 0.1f) myCrownState = CrownState.Returning;
     }
     public void ReturningCrownState()
     {
         float dist = Vector3.Distance(myCrown.position, myOrigin.position);
+        //Debug.Log(dist);
+        //player_crown.setParameterByName("crownDistance", dist);
 
         myCrown.position = Vector3.MoveTowards(myCrown.position, myOrigin.position, 15 * Time.deltaTime);
+
+        if(dist <= 2) { player_crown.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT); }
 
         if (dist <= 1)
         {
             myCrown.parent = transform;
             myCrown.position = myOrigin.position;
             myCrownState = CrownState.Default;
+
+         
         }
     }
 

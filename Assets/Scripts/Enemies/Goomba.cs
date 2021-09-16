@@ -92,6 +92,8 @@ public class Goomba : Enemy
 
     public override void OnHit()
     {
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Enemy/enemy_onDamage", gameObject);
+
         base.OnHit();
         Destroy(GetComponent<Collider2D>());
         myAnimator.SetTrigger("Death");
@@ -100,6 +102,7 @@ public class Goomba : Enemy
 
     private void OnDestroy()
     {
+        //FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Enemy/enemy_onDeath", gameObject);
         RemoveEnemy();
     }
 }

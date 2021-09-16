@@ -2,6 +2,7 @@ public abstract class PlayerState
 {
     // Player ref
     public Player playerRef;
+ 
 
     public PlayerState(Player playerRef)
     {

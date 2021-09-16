@@ -39,7 +39,6 @@ public class PSJumping : PlayerState
         playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce);
 
         //Play a sound ;)
-        Debug.Log("Jump!");
-        FMODUnity.RuntimeManager.PlayOneShot("event:/Player/player_jump", playerRef.transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/player_jump", playerRef.transform.position);
     }
 }
