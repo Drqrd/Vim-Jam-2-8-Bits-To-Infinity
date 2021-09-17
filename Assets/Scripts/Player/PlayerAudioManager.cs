@@ -38,7 +38,6 @@ public class PlayerAudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShotAttached(eventPath, player);
     }
 
-
     public static bool IsPlaying(FMOD.Studio.EventInstance instance)
     {
         FMOD.Studio.PLAYBACK_STATE state;
