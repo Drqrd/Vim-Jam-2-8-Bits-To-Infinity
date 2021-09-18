@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public CapsuleCollider2D _collider   { get; protected set; }
     public bool IsGrounded { get; protected set; }
 
+    public virtual bool DebugMovementStates { get; protected set; }
     public virtual bool DoubleJump { get; set; }
     public virtual float JumpForce { get; protected set; }
     public virtual float MoveSpeed { get; protected set; }

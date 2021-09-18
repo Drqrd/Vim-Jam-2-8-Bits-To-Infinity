@@ -5,6 +5,10 @@ public class PlayerMovement : Player
 {
     public PlayerState currentState;
 
+    [Header("DEBUG")]
+    [SerializeField]
+    private bool debugMovementStates = false;
+
     [Header("Keybinds")]
     [SerializeField]
     private KeyCode left  = KeyCode.A;
@@ -25,6 +29,7 @@ public class PlayerMovement : Player
     [SerializeField]
     private float dashDuration = 0.5f;
 
+    public override bool DebugMovementStates { get { return debugMovementStates; } }
     public override float JumpForce { get { return jumpForce; } }
     public override float MoveSpeed { get { return moveSpeed; } }
 

@@ -23,6 +23,7 @@ public class PSIdle : PlayerState
 
     public override void OnStateEnter()
     {
+        if (playerRef.DebugMovementStates) { Debug.Log("Idle"); }
         playerRef._collider.sharedMaterial = playerRef.Friction;
     }
 }

@@ -17,7 +17,7 @@ public class PSJumping : PlayerState
     public override void FixedTick()
     {
         // if not vertically moving
-        if (Mathf.Abs(playerRef._rigidbody.velocity.y) == 0f)
+        if (playerRef.IsGrounded && playerRef._rigidbody.velocity.y < 1f)
         {
             // If there is x velocity, set state to moving, else idle
             if (Mathf.Abs(playerRef._rigidbody.velocity.x) != 0f) { playerRef.SetState(new PSMoving(playerRef)); }
@@ -35,7 +35,8 @@ public class PSJumping : PlayerState
     }
 
     public override void OnStateEnter()
-    { 
+    {
+        if (playerRef.DebugMovementStates) { Debug.Log("Jumping"); }
         playerRef._rigidbody.velocity = new Vector2(playerRef._rigidbody.velocity.x, playerRef.JumpForce);
 
         //Play a sound ;)
