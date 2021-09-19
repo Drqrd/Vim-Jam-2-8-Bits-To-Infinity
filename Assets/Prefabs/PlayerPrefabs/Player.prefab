@@ -64,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPlayerAnimator: {fileID: 547707326505820054}
   myPlayerSprite: {fileID: 547707326505820041}
+  debugMovementStates: 0
   left: 97
   right: 100
   jump: 32
