@@ -11,6 +11,9 @@ public class EnemyShoot : MonoBehaviour
     [Range(0.5f,2f)]
     [SerializeField] private float particleSize;
 
+    [Range(0.5f, 10f)]
+    [SerializeField] private float detectionDistance = 2f;
+
     [Tooltip("If true, shoots periodically. Otherwise shoot when detecting player")]
     [SerializeField] private bool shootPeriodically;
     [Range(1f,5f)]
@@ -66,6 +69,7 @@ public class EnemyShoot : MonoBehaviour
 
     private void DetectPlayer()
     {
-
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.forward * detectionDistance );
+        if (hit.transform.tag == "Player") { Shoot(); }
     }
 }
