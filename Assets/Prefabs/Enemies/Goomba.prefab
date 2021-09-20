@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 7777431345852490660}
   - component: {fileID: 7777431345852490661}
   - component: {fileID: 7777431345852490657}
+  - component: {fileID: 6374477400347492190}
   m_Layer: 6
   m_Name: Goomba
   m_TagString: Untagged
@@ -217,3 +218,23 @@ MonoBehaviour:
   myMovingRight: 0
   goombaDamage: 50
   myAnimator: {fileID: 2842212137844816633}
+--- !u!114 &6374477400347492190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777431345852490662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c434463d36ddf674392a8947d5ead93a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObj: {fileID: 547707326504375766, guid: 2da58eea78258c24590b6d6767cf6cda, type: 3}
+  objToShoot: {fileID: 286421360359463896, guid: 41edd75ade83e05498c89af379348dfb, type: 3}
+  particleSize: 1
+  detectionDistance: 2
+  shootPeriodically: 1
+  timeBetweenShots: 2
+  minimumBetweenShots: 0.1
+  shotVariability: 0
