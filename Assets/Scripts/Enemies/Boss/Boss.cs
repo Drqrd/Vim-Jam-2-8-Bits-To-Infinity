@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Boss : MonoBehaviour
+public class Boss : Enemy
 {
     [Header("Parameters")]
     [Range(100f, 500f)] [SerializeField] private float maxHealth   = 200f;
@@ -20,6 +20,8 @@ public class Boss : MonoBehaviour
     private float moveDir;
 
 
+   
+
     private void Awake()
     {
         moveDir = -1f;
@@ -31,6 +33,11 @@ public class Boss : MonoBehaviour
         jumpTimer = 0;
         moveTimer = 0;
         StartCoroutine(Move());
+    }
+
+    void Start()
+    {
+        EnemyManager.Instance.myEnemies.Add(this);
     }
 
     private void Update()
@@ -102,12 +109,14 @@ public class Boss : MonoBehaviour
     {
         Debug.Log("dead");
         transform.gameObject.SetActive(false);
+        RemoveEnemy();
     }
 
     // Adds to health based on inputted float
     public void SetHealth(float x)
     {
         health += x;
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Enemy/enemy_onDamage", gameObject);
 
         isDying = health <= 0 ? true : false;
     }

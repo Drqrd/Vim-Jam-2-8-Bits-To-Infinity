@@ -164,15 +164,15 @@ public class PlayerMovement : Player
 
     private void DoubleJumpCheck() // This is the weird double jump check. Suggest checking if the player is grounded instead.
     {
-        if (doubleJumpKey == 1) 
+        if (!CheckIfGrounded()) 
         {
-            doubleJumpKey = 0;
+            //doubleJumpKey = 0;
             DoubleJump = true; 
         }
-        else 
-        { 
-            doubleJumpKey = 1;
-            DoubleJump = false;
-        }
+        //else 
+        //{ 
+        //    doubleJumpKey = 1;
+        //    DoubleJump = false;
+        //}
     }
 }

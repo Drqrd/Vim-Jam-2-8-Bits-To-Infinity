@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class EnemyManager : MonoBehaviour
     public List<Enemy> myEnemies;
     void Update()
     {
-        
+        if (myEnemies.Count == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public bool CircleCollisionEnemy(Vector3 aPosition, float aRadius)

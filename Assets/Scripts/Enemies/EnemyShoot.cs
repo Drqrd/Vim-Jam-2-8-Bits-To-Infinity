@@ -44,6 +44,8 @@ public class EnemyShoot : MonoBehaviour
     {
         GameObject obj = Instantiate(objToShoot, transform.position, transform.rotation);
         obj.transform.localScale = new Vector3(particleSize, particleSize, particleSize);
+
+        FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Enemy/enemy_shoot", gameObject);
     }
 
     private void TimedShot()

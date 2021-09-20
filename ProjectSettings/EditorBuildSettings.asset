@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main_Menu.unity
+    guid: 651bd3a57e65f8645b7d7657fe08ed56
+  - enabled: 1
+    path: Assets/Scenes/Martin_scene.unity
+    guid: ca51beb5216a9e644a0b3a818a78f6a6
+  - enabled: 1
+    path: Assets/Scenes/JustinTest.unity
+    guid: 24eb84364e7f8a147aba24fb1c81e35a
+  - enabled: 1
+    path: Assets/Scenes/Victory_Scene.unity
+    guid: d93f67606e17bd049a9aa302b677227c
   m_configObjects: {}
