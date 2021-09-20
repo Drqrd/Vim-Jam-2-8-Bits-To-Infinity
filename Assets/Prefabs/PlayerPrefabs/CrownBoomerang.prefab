@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8312669246728312444}
   - component: {fileID: 8312669246728312447}
+  - component: {fileID: 6452994853060298397}
   m_Layer: 0
   m_Name: CrownBoomerang
   m_TagString: Untagged
@@ -84,6 +85,18 @@ MonoBehaviour:
   myCrownPoint: {x: 0, y: 0, z: 0}
   myMaxChargeUp: 0.5
   myCrownState: 0
+--- !u!114 &6452994853060298397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312669246728312446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea3b982c58271d43bd9a2a079347daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8312669246951583254
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +182,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8312669247046424665}
   - component: {fileID: 8312669247046424670}
+  - component: {fileID: 5473333034174031862}
+  - component: {fileID: 7906843181003564686}
   m_Layer: 0
   m_Name: CrownSprite
   m_TagString: Untagged
@@ -241,6 +256,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &5473333034174031862
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312669247046424664}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2
+--- !u!114 &7906843181003564686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312669247046424664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea3b982c58271d43bd9a2a079347daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8312669247357916509
 GameObject:
   m_ObjectHideFlags: 0

@@ -41,8 +41,6 @@ public class CrownBoomerang : MonoBehaviour
     }
     void Update()
     {
-
-
         switch (myCrownState)
         {
             case CrownState.Default:

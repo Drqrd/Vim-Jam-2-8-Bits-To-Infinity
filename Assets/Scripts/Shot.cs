@@ -25,6 +25,6 @@ public class Shot : MonoBehaviour
         if (collision.tag == "Player") { collision.gameObject.GetComponent<Player>().SetHealth(-damageToPlayer); }
 
         // Destroy self when colliding
-        if (collision.name != transform.name && collision.name != "Goomba") { Destroy(transform.gameObject); }
+        if (collision.name != transform.name && collision.name != "Goomba" && collision.name != "Boss") { Destroy(transform.gameObject); }
     }
 }

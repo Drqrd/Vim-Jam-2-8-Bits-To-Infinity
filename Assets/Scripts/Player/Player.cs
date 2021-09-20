@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public virtual PhysicsMaterial2D NoFriction { get; protected set; }
     public virtual PhysicsMaterial2D Friction   { get; protected set; }
 
+    public float damageToEnemy = 50f;
+
     public Animator myPlayerAnimator;
     public SpriteRenderer myPlayerSprite;
 
