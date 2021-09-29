@@ -12,11 +12,11 @@ Our awesome sound designer who took care of the auditory shenanigans. <br>
 https://github.com/cody967
 
 <h3> Martin </h3>
-Programmer, contributed to player combat (through the crown!), level design, player and enemy movement, and more!
+Programmer, contributed to player combat (through the crown!), level design, player and enemy movement, and more! <br>
 https://github.com/maraon99
 
 <h3> Justin D'Errico </h3>
-Programmer, contributed to player movement, combat, and boss scripts.
+Programmer, contributed to player movement, combat, and boss scripts. <br>
 https://github.com/Drqrd/
 
 <h2> Goal </h2>
