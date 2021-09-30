@@ -5,15 +5,15 @@ Created: September 10th, 2021 - September 20th, 2021 <br>
 <h2> The Team </h2>
 <h3> Kae </h3>
 The artist of the group, created all of the visual assets you see in the game! <br>
-https://github.com/Kae-Creative
+https://kaecreative.myportfolio.com/
 
 <h3> Cody </h3>
 Our awesome sound designer who took care of the auditory shenanigans. <br>
-https://github.com/cody967
+https://www.codymosblech.com/
 
-<h3> Martin </h3>
+<h3> Martin Andersson</h3>
 Programmer, contributed to player combat (through the crown!), level design, player and enemy movement, and more! <br>
-https://github.com/maraon99
+https://www.martinandersson.dev/
 
 <h3> Justin D'Errico </h3>
 Programmer, contributed to player movement, combat, and boss scripts. <br>
